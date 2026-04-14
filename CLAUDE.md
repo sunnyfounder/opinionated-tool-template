@@ -25,6 +25,7 @@ This tool uses a standard Sunnyfounder DEDO stack. Do not introduce alternatives
 - **Scheduling** (if needed): `node-cron` — pure Node, no system cron
 - **Scraping** (if needed): `playwright` with headless Chromium
 - **Config**: `dotenv` loading `.env`, documented in `.env.example`
+- **Deployment**: Docker — but only for production. Local development always uses `npm run dev`. Never ask a user to run Docker locally.
 
 If the user asks for React, a build system, a different DB, or a different web framework, push back: this tool is meant to be runnable by non-technical users with minimum setup. Stack changes defeat that purpose. If there's a genuine reason (e.g., a library only exists for another stack), discuss it with the user explicitly before adding it.
 
@@ -46,6 +47,15 @@ Any string that appears in the web UI, CLI output, or error messages that the us
 ## Rule 5: Preserve the default project structure
 
 The layout of `src/`, `data/`, `logs/`, the entry points in `src/index.ts` and `src/cli.ts`, the database setup in `src/db.ts`, and the logger setup in `src/logger.ts` — all of these are DEDO conventions. Modify the *contents* of these files freely, but don't rename or restructure them without a reason. Future Claude sessions, and future humans reading the tool, expect to find things where the scaffold put them.
+
+When writing EJS templates or HTMX attributes, never hardcode `/` as the root. The tool may be served from a path prefix (e.g. `/tools/invoice-checker`) in production. Use the `basePath` local that is available in every EJS render:
+
+```ejs
+<a href="<%= basePath %>/some-page">link</a>
+<form hx-post="<%= basePath %>/submit">…</form>
+```
+
+In route handlers, use `res.redirect(req.baseUrl + '/target')` rather than `res.redirect('/target')`.
 
 ## Rule 6: Emit observability through the helpers, not ad-hoc
 
