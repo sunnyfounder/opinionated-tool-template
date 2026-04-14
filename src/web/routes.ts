@@ -1,6 +1,17 @@
 import { Router } from 'express';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 export const routes = Router();
+
+const { version } = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../package.json'), 'utf-8')
+);
+
+routes.get('/health', (_req, res) => {
+  res.json({ status: 'ok', tool: '{{TOOL_NAME}}', version });
+});
 
 /**
  * Home page. The scaffold ships a placeholder view — replace the contents

@@ -1,6 +1,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { config } from '../config.js';
 import { routes } from './routes.js';
 import { log } from '../logger.js';
 
@@ -17,7 +18,8 @@ export function createServer() {
   // Available in every rendered view via EJS locals. Override per-render
   // by passing the same keys in the second argument of res.render().
   app.locals.toolName = '{{TOOL_NAME}}';
-  app.locals.navItems = [{ href: '/', label: '首頁' }];
+  app.locals.basePath = config.basePath;
+  app.locals.navItems = [{ href: config.basePath || '/', label: '首頁' }];
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -36,7 +38,7 @@ export function createServer() {
     next();
   });
 
-  app.use('/', routes);
+  app.use(config.basePath || '/', routes);
 
   // 404 — plain HTML, no view required
   app.use((_req, res) => {

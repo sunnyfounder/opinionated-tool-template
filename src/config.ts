@@ -30,7 +30,9 @@ export const config = {
   toolRoot: TOOL_ROOT,
   dataDir: join(TOOL_ROOT, 'data'),
   logsDir: join(TOOL_ROOT, 'logs'),
-  port: int('PORT', 3000),
+  port: int('TOOL_PORT', 3000),
+  // Strip trailing slash; empty string means mount at root (local dev default).
+  basePath: (process.env.APP_BASE_PATH ?? '').replace(/\/$/, ''),
   logLevel: process.env.LOG_LEVEL ?? 'info',
   tz: process.env.TZ!,
 } as const;

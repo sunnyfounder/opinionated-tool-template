@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
+    "start": "tsx src/index.ts",
     "cli": "tsx src/cli.ts",
     "db:inspect": "sqlite3 data/{{TOOL_NAME}}.db"
   },
@@ -15,7 +16,8 @@
     "ejs": "^3.1.10",
     "express": "^4.21.0",
     "node-cron": "^3.0.3",
-    "pino": "^9.4.0"
+    "pino": "^9.4.0",
+    "tsx": "^4.19.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.11",
@@ -23,7 +25,6 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.5.0",
     "@types/node-cron": "^3.0.11",
-    "tsx": "^4.19.0",
     "typescript": "^5.6.0"
   }
 }
