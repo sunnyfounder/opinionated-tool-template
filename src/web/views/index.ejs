@@ -1,0 +1,22 @@
+<%- include('partials/header', { title: '首頁' }) %>
+
+<!-- PLACEHOLDER START — replace everything between these two markers with the real home view -->
+<h2>這個工具還在建置中</h2>
+
+<p>你看到這個頁面，代表 <code><%= toolName %></code> 的骨架已經建好了，但業務邏輯還沒實作。</p>
+
+<h3>接下來該做什麼？</h3>
+
+<ol>
+  <li>在 terminal 進到這個資料夾</li>
+  <li>執行 <code>claude</code> 開一個 Claude Code session</li>
+  <li>告訴 Claude「依照 BUSINESS_LOGIC.md 把這個工具建完」</li>
+  <li>Claude 會先讀 <code>CLAUDE.md</code> 和 <code>BUSINESS_LOGIC.md</code>，然後把程式碼寫進 <code>src/core/</code></li>
+</ol>
+
+<p style="margin-top: 2rem; color: var(--muted); font-size: 0.9rem;">
+  這個頁面是 template 自動產生的 placeholder — 當 Claude 實作完業務邏輯之後，這個 index.ejs 會被替換成真正的首頁。
+</p>
+<!-- PLACEHOLDER END -->
+
+<%- include('partials/footer') %>

@@ -1,0 +1,29 @@
+{
+  "name": "{{TOOL_NAME}}",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Sunnyfounder DEDO tool. See BUSINESS_LOGIC.md for what it does.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "cli": "tsx src/cli.ts",
+    "db:inspect": "sqlite3 data/{{TOOL_NAME}}.db"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "node-cron": "^3.0.3",
+    "pino": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.5.0",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

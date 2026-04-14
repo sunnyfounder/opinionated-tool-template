@@ -1,0 +1,18 @@
+# Force LF line endings for all text files
+# This matters when a Windows user commits files that will later run
+# on a Linux server — CRLF line endings can break shell scripts and
+# some config parsers.
+
+* text=auto eol=lf
+
+# Explicit: these should always be LF regardless of autodetection
+*.ts text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.ejs text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+.env.example text eol=lf
+.gitignore text eol=lf

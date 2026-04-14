@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> · <%= toolName %></title>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --bg: #fafafa;
+      --border: #e0e0e0;
+      --accent: #2563eb;
+      --muted: #666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Segoe UI", sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    header h1 { font-size: 1.1rem; margin: 0; font-weight: 600; }
+    header nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    header nav a:hover { color: var(--accent); }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><%= toolName %></h1>
+    <nav>
+      <% navItems.forEach(function(item) { %>
+        <a href="<%= item.href %>"><%= item.label %></a>
+      <% }); %>
+    </nav>
+  </header>
+  <main>
