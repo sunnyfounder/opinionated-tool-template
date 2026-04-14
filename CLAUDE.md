@@ -12,6 +12,8 @@ If the change modifies a business rule, **update `BUSINESS_LOGIC.md` in the same
 
 If the change introduces a new business rule not covered in `BUSINESS_LOGIC.md`, **add it** in the same commit. Capture not just *what* the rule is, but *why* — which decision, which person, which constraint it came from. The `why` is more valuable than the `what` over time.
 
+`BUSINESS_LOGIC.md` is written in Traditional Chinese so the non-technical tool owner can review it themselves. The structural tags `What:` and `Why:` stay in English (they are grep anchors). Do not translate the file back to English, do not switch it to bilingual — keep it in Traditional Chinese when editing.
+
 ## Rule 2: The stack is fixed
 
 This tool uses a standard Sunnyfounder DEDO stack. Do not introduce alternatives without a real reason and a note in the commit message.

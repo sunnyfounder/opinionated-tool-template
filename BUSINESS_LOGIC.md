@@ -1,66 +1,69 @@
 # BUSINESS_LOGIC.md — {{TOOL_NAME}}
 
-> This file is the source of truth for **why** this tool exists and **what rules** it enforces. The code is an implementation of this file. If you change the code, you may need to update this file in the same commit. See `CLAUDE.md` for the contract.
+> 這份文件是這個工具**為什麼存在**、**遵守什麼規則**的唯一真實來源。程式碼是這份文件的實作。如果你改了程式碼，很可能需要在同一個 commit 裡一起更新這份文件。詳細規則見 `CLAUDE.md`。
+>
+> 這份文件以繁體中文書寫，方便非技術的工具擁有者自己看、自己 review。結構標籤 `What:` 和 `Why:` 保留英文 —— 它們是給 Claude 判斷規則完整性的錨點，不要翻譯。
 
-## 1. Purpose
+## 1. 目的
 
-[One paragraph: what business problem does this tool solve, for whom?]
+[一段話：這個工具解決什麼業務問題？服務誰？]
 
-## 2. Scope
+## 2. 範圍
 
-**This tool does:**
+**這個工具會做：**
 
-- [bullet]
-- [bullet]
+- [條列]
+- [條列]
 
-**This tool does NOT:**
+**這個工具不會做：**
 
-- [bullet — things people might expect but that are explicitly out of scope]
-- [bullet]
+- [條列 —— 別人可能期待、但被明確排除在外的事情]
+- [條列]
 
-## 3. Inputs
+## 3. 輸入
 
-[Where does data come from? What format? Who provides it?]
+[資料從哪裡來？什麼格式？誰提供？]
 
-## 4. Processing rules
+## 4. 處理規則
 
-Each rule should answer both *what* and *why*. The *why* is what makes this file valuable — anyone can read the code to see what it does; only this file explains why it does it that way.
+每一條規則都要同時寫 *做什麼* 和 *為什麼*。*為什麼* 才是這份文件的價值所在 —— 程式碼能告訴你「做了什麼」，但只有這份文件能解釋「為什麼這樣做」。
 
-### Rule 1: [short name]
+### 規則 1：[短名稱]
 
-**What**: [the rule]
+**What**: [規則內容]
 
-**Why**: [the reason — which person decided, which contract requires it, which past failure it prevents, etc.]
+**Why**: [為什麼 —— 哪個人決定的？哪份合約要求的？哪次過去踩過的坑？]
 
-### Rule 2: [short name]
+### 規則 2：[短名稱]
 
-**What**: [the rule]
+**What**: [規則內容]
 
-**Why**: [the reason]
+**Why**: [為什麼]
 
-*(Add more rules as the tool grows. If this section passes ~400 lines, consider splitting into a `business-logic/` folder with one file per topic and an `index.md`.)*
+*（規則多起來就繼續加。如果這一節超過 400 行，考慮拆成 `business-logic/` 資料夾，一個主題一個檔，再加一份 `index.md`。）*
 
-## 5. Outputs
+## 5. 輸出
 
-[What does the tool produce? Who consumes it? In what format?]
+[這個工具產出什麼？誰會看？什麼格式？對方拿去做什麼？]
 
-## 6. Edge cases and known exceptions
+## 6. 邊界案例與例外
 
-- **[edge case 1]**: [how the tool handles it and why]
-- **[edge case 2]**: [same]
+- **[案例 1]**：[工具怎麼處理，為什麼這樣處理]
+- **[案例 2]**：[同上]
 
-## 7. Rule provenance
+## 7. 規則來源
 
-Who made which decision, when, and why. This matters when rules need to be re-examined later — you want to know who to ask.
+誰在什麼時候決定了什麼，為什麼。之後如果規則需要重新檢視，你會知道要去找誰問。
 
-- **[rule X]** — [date] — [person] — [context]
-- **[rule Y]** — [date] — [person] — [context]
+- **[規則 X]** — [日期] — [人名] — [當時的背景]
+- **[規則 Y]** — [日期] — [人名] — [當時的背景]
 
-## 8. Decision log
+## 8. 決策紀錄
 
-Append-only record of changes to business rules. Never delete entries; add new ones.
+只增不減的變更紀錄。**永遠不要刪條目**，只新增。日期用台北時區的 `YYYY-MM-DD`。
 
-### [YYYY-MM-DD] — Initial creation
-- Created from spec produced by `scoping-sunnyfounder-automations` skill
-- Initial rules captured: [list]
-- Open questions: [any]
+### [YYYY-MM-DD] — 初次建立
+
+- 從 `scoping-sunnyfounder-automations` 產出的規格初始化
+- 首次紀錄的規則：[條列]
+- 尚未釐清的問題：[條列，若有]

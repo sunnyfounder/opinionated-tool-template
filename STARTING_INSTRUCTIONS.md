@@ -37,19 +37,21 @@ After the substitution, run a project-wide search for `{{TOOL_NAME}}` and confir
 
 ## Step 3 — Populate BUSINESS_LOGIC.md from the spec
 
-Rewrite `BUSINESS_LOGIC.md` end-to-end so every section is filled from the spec. Preserve the section headings — do not invent new structure. Map the spec into the template like this:
+Rewrite `BUSINESS_LOGIC.md` end-to-end so every section is filled from the spec. **Preserve the Traditional Chinese section headings exactly as they appear in the template** — do not translate them to English, do not invent new structure. The body text you write should also be in Traditional Chinese (the tool owner is a non-technical Sunnyfounder employee who reviews this file themselves). The only exceptions are the structural tags `What:` and `Why:`, which stay in English so Claude can grep for rules missing a rationale.
 
-- **1. Purpose** ← the spec's "what problem / for whom" framing
-- **2. Scope (does / does not)** ← in-scope and out-of-scope bullets from the spec
-- **3. Inputs** ← what data the tool consumes and where it comes from
-- **4. Processing rules** ← every rule the spec describes, each formatted as:
-  - **What**: [the rule]
-  - **Why**: [the reason — which person decided, which contract requires it, which past failure it prevents]
-  - If the spec doesn't give a *why* for a rule, write `Why: [to be confirmed with user]` and add the rule to the open-questions list you report in Step 5. Do not invent reasons.
-- **5. Outputs** ← what the tool produces and who reads it
-- **6. Edge cases** ← anything the spec flags as unusual or explicitly handled
-- **7. Rule provenance** ← who decided what, if the spec names people
-- **8. Decision log** ← one entry for today: `[YYYY-MM-DD] — Initial creation from spec produced by scoping-sunnyfounder-automations`. Use Asia/Taipei local date.
+Map the spec into the template like this:
+
+- **1. 目的** ← the spec's "what problem / for whom" framing
+- **2. 範圍** ← the "does / does not" bullets from the spec
+- **3. 輸入** ← what data the tool consumes and where it comes from
+- **4. 處理規則** ← every rule the spec describes, each formatted as:
+  - **What**: [規則內容]
+  - **Why**: [為什麼 — 誰決定的、哪份合約要求的、哪次過去踩過的坑]
+  - If the spec does not give a *why* for a rule, write `**Why**: [待與使用者確認]` and add the rule to the open-questions list you report in Step 5. **Do not invent reasons.**
+- **5. 輸出** ← what the tool produces and who reads it
+- **6. 邊界案例與例外** ← anything the spec flags as unusual or explicitly handled
+- **7. 規則來源** ← who decided what, if the spec names people
+- **8. 決策紀錄** ← one entry for today: `[YYYY-MM-DD] — 初次建立，從 scoping-sunnyfounder-automations 產出的規格初始化`. Use the Asia/Taipei local date.
 
 Do not drop rules the spec contains. Do not add rules the spec does not contain.
 
