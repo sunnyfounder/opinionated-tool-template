@@ -62,6 +62,8 @@
 
 只增不減的變更紀錄。**永遠不要刪條目**，只新增。日期用台北時區的 `YYYY-MM-DD`。
 
+> **歸檔規則**：當這一節超過 10 筆時，把「超過一個月以前」的條目搬到 `business-logic/decisions-archive-YYYY.md`（YYYY = 被歸檔條目的年份），這份文件只保留最近一個月內的條目。歸檔是搬移不是刪除 —— 條目要完整保存在 archive 檔案裡。
+
 ### [YYYY-MM-DD] — 初次建立
 
 - 從 `scoping-sunnyfounder-automations` 產出的規格初始化
