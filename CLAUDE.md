@@ -47,7 +47,18 @@ Any string that appears in the web UI, CLI output, or error messages that the us
 
 The layout of `src/`, `data/`, `logs/`, the entry points in `src/index.ts` and `src/cli.ts`, the database setup in `src/db.ts`, and the logger setup in `src/logger.ts` — all of these are DEDO conventions. Modify the *contents* of these files freely, but don't rename or restructure them without a reason. Future Claude sessions, and future humans reading the tool, expect to find things where the scaffold put them.
 
-## Rule 6: Check the log before blaming the code
+## Rule 6: Emit observability through the helpers, not ad-hoc
+
+`src/logger.ts` exports three things you should use:
+
+- `log` — the raw pino instance, for unstructured debug lines
+- `logEvent(type, fields)` — the standard way to record "something happened". Use event types from the exported `EVENT` constant (`TOOL_START`, `LLM_CALL`, `HTTP_REQUEST`, `SCHEDULED_RUN`, `EXTERNAL_FETCH`, `ERROR`) so logs aggregate cleanly across tools. Add new constants to `EVENT` if the tool needs one — don't hardcode raw strings at call sites.
+- `observeLLM({ model, purpose }, fn)` — wrap every LLM API call with this. It logs model, duration, tokens in/out, and cost automatically, and emits an `ERROR` event on failure before re-throwing. If you call an LLM without going through this wrapper, you are breaking the DEDO observability contract.
+- `logQuery({ session_id, query_text, response_text })` — call this once per natural-language query the user sends to the tool, with the raw question and the tool's raw answer. The point is to find functionality gaps later: repeated rephrasings in one session signal the tool couldn't answer. If the tool exposes an NL query feature and you don't call `logQuery`, that feature is invisible to usage analysis. Session strategy is the caller's call — a rotating cookie for the web UI, one UUID per CLI invocation. Raw text is stored on purpose; if a tool handles sensitive data, redact before calling, don't skip the call.
+
+Any new major operation in the tool — a scheduled job firing, an external HTTP call, a user hitting a route that triggers real work — gets a `logEvent` line. "Major" means something you'd want to see in the log when debugging a complaint two weeks later.
+
+## Rule 7: Check the log before blaming the code
 
 When something isn't working, the first thing to look at is `logs/YYYY-MM-DD.jsonl` (the current day's log file). The logger writes structured events for every major operation. Reading the log is faster than re-reading the code.
 
