@@ -49,14 +49,7 @@ The layout of `src/`, `data/`, `logs/`, the entry points in `src/index.ts` and `
 
 ## Rule 6: Emit observability through the helpers, not ad-hoc
 
-`src/logger.ts` exports three things you should use:
-
-- `log` — the raw pino instance, for unstructured debug lines
-- `logEvent(type, fields)` — the standard way to record "something happened". Use event types from the exported `EVENT` constant (`TOOL_START`, `LLM_CALL`, `HTTP_REQUEST`, `SCHEDULED_RUN`, `EXTERNAL_FETCH`, `ERROR`) so logs aggregate cleanly across tools. Add new constants to `EVENT` if the tool needs one — don't hardcode raw strings at call sites.
-- `observeLLM({ model, purpose }, fn)` — wrap every LLM API call with this. It logs model, duration, tokens in/out, and cost automatically, and emits an `ERROR` event on failure before re-throwing. If you call an LLM without going through this wrapper, you are breaking the DEDO observability contract.
-- `logQuery({ session_id, query_text, response_text })` — call this once per natural-language query the user sends to the tool, with the raw question and the tool's raw answer. The point is to find functionality gaps later: repeated rephrasings in one session signal the tool couldn't answer. If the tool exposes an NL query feature and you don't call `logQuery`, that feature is invisible to usage analysis. Session strategy is the caller's call — a rotating cookie for the web UI, one UUID per CLI invocation. Raw text is stored on purpose; if a tool handles sensitive data, redact before calling, don't skip the call.
-
-Any new major operation in the tool — a scheduled job firing, an external HTTP call, a user hitting a route that triggers real work — gets a `logEvent` line. "Major" means something you'd want to see in the log when debugging a complaint two weeks later.
+Use `log`, `logEvent`, `observeLLM`, and `logQuery` from `src/logger.ts` — never ad-hoc logging at call sites. See `docs/OBSERVABILITY.md` for the full contract including event types and session ID strategy.
 
 ## Rule 7: Check the log before blaming the code
 
@@ -64,14 +57,4 @@ When something isn't working, the first thing to look at is `logs/YYYY-MM-DD.jso
 
 ## What to do when this tool is first opened
 
-If you are opening this tool for the first time and `src/core/` is empty, that means the tool has just been scaffolded and the business logic has not been implemented yet. Your job is to:
-
-1. Read `BUSINESS_LOGIC.md` to understand what the tool should do
-2. Read `README.md` to understand how the user will run it
-3. Implement the business logic in `src/core/`
-4. Wire `src/core/` into `src/web/routes.ts` (for the web UI) and `src/cli.ts` (for command-line invocation)
-5. Update `README.md` with any tool-specific usage instructions
-6. Test that `npm run dev` starts the web UI and shows something meaningful
-7. Commit
-
-If `src/core/` is not empty, the tool has been worked on before. Read `BUSINESS_LOGIC.md` and any existing code, then proceed with whatever the user asked for.
+Read `BUSINESS_LOGIC.md` and any existing code in `src/core/` before touching anything. If `src/core/` is empty, implement business logic there, wire it into `src/web/routes.ts` and `src/cli.ts`, update `README.md`, and verify `npm run dev` starts correctly before committing.
